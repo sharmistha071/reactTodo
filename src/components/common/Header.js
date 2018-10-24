@@ -17,13 +17,13 @@ const styles = {
     backgroundColor: '#F8F8F8',
     height: 50,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 20},
+    shadowOffset: { width: 0, height: 20 },
     shadowOpacity: 0.5,
     elavation: 2
   },
   textStyle: {
     fontSize: 20,
   }
-}
+};
 
-export default Header;
+export { Header };

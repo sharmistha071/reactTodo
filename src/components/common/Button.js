@@ -1,8 +1,8 @@
-import React, { Component  } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
 const Button = (props) => {
-  const {buttonStyle, textStyle} = styles;
+  const { buttonStyle, textStyle } = styles;
   return (
     <TouchableOpacity style={buttonStyle} onPress={props.onPress}>
       <Text style={textStyle}>{props.btnText}</Text>
@@ -20,7 +20,8 @@ const styles = {
     padding: 5,
     borderColor: '#007aff',
     borderRadius: 5,
-    borderWidth: 1
+    borderWidth: 1,
+    height: 50
   },
   textStyle: {
     alignSelf: 'center',
@@ -28,6 +29,6 @@ const styles = {
     paddingTop: 5,
     paddingBottom: 5
   }
-}
+};
 
-export default Button;
+export { Button };

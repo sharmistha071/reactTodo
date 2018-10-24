@@ -1,42 +1,45 @@
 import React, { Component } from 'react';
-import {Text, View} from 'react-native';
+import { View } from 'react-native';
 import firebase from 'firebase';
-import Header from './components/common/Header';
-import LoginForm from './components/LoginForm';
-import Button from './components/common/Button';
-import Spinner from './components/common/Spinner';
+import { Provider } from 'react-redux';
+import { Header, Spinner } from './components/common';
+import LoginForm from './components/container/LoginForm';
+import LibraryList from './components/container/LibraryList';
+import configureStore from './configStore';
+
+const store = configureStore();
 
 class App extends Component {
   state = { loggedIn: null };
 
   componentWillMount() {
     firebase.initializeApp({
-      apiKey: "AIzaSyClojAdu2-rp8puM0ZTXvBytYMwE-AReuA",
-      authDomain: "reacttodo-a2336.firebaseapp.com",
-      databaseURL: "https://reacttodo-a2336.firebaseio.com",
-      projectId: "reacttodo-a2336",
-      storageBucket: "reacttodo-a2336.appspot.com",
-      messagingSenderId: "25830847225"
+      apiKey: 'AIzaSyClojAdu2-rp8puM0ZTXvBytYMwE-AReuA',
+      authDomain: 'reacttodo-a2336.firebaseapp.com',
+      databaseURL: 'https://reacttodo-a2336.firebaseio.com',
+      projectId: 'reacttodo-a2336',
+      storageBucket: 'reacttodo-a2336.appspot.com',
+      messagingSenderId: '25830847225'
     });
 
     firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+      if (user) {
         this.setState({ loggedIn: true });
-      }else {
+      } else {
         this.setState({ loggedIn: false });
       }
     });
   }
 
   renderContent() {
-    // console.log(this.state.loggedIn);
-    // if(this.state.loggedIn){
-    //
-    // }
-
-    switch(this.state.loggedIn) {
+    switch (this.state.loggedIn) {
       case true:
-        return <Button btnText="Log Out" onPress={'hello'}></Button>;
+        // return (
+        //   <View style={{ height: 50 }}>
+        //     <Button btnText="Log Out" onPress={() => firebase.auth().signOut()} />
+        //   </View>
+        // );
+        return <LibraryList />;
       case false:
         return <LoginForm />;
       default:
@@ -46,12 +49,14 @@ class App extends Component {
 
   render() {
     return (
-      <View>
-        <Header headerText={'Select a Topic'} />
-        { this.renderContent() }
-      </View>
+      <Provider store={store}>
+        <View>
+          <Header headerText={'Select a Topic'} />
+          { this.renderContent() }
+        </View>
+      </Provider>
     );
   }
-};
+}
 
 export default App;
