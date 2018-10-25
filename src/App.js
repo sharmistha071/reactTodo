@@ -50,7 +50,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View>
+        <View style={{ flex: 1 }}>
           <Header headerText={'Select a Topic'} />
           { this.renderContent() }
         </View>
